@@ -41,9 +41,7 @@ def _gen_captcha(img_dir, num_per_image, n, width, height, choices, max_images_c
     image = ImageCaptcha(width=width, height=height)
 
     remain_count = max_images_count
-    print('max images is', remain_count)
     epoche_count = ncr(len(choices),num_per_image)
-    print(epoche_count)
     print('generating %s epoches of captchas in %s.' % (n, img_dir))
 
     for _ in range(n):
