@@ -20,8 +20,17 @@ def get_choices():
         (FLAGS.lower, string.ascii_lowercase),
         (FLAGS.upper, string.ascii_uppercase),
         ]
+    
     return tuple([i for is_selected, subset in choices for i in subset if is_selected])
 
+import operator as op
+from functools import reduce
+
+def ncr(n, r):
+    r = min(r, n-r)
+    numer = reduce(op.mul, range(n, n-r, -1), 1)
+    denom = reduce(op.mul, range(1, r+1), 1)
+    return numer // denom  # or / in Python 2
 
 def _gen_captcha(img_dir, num_per_image, n, width, height, choices, max_images_count):
     if os.path.exists(img_dir):
@@ -32,8 +41,9 @@ def _gen_captcha(img_dir, num_per_image, n, width, height, choices, max_images_c
     image = ImageCaptcha(width=width, height=height)
 
     remain_count = max_images_count
-    epoche_count = len(list(itertools.permutations(choices, num_per_image)))
-
+    print('max images is', remain_count)
+    epoche_count = ncr(len(choices),num_per_image)
+    print(epoche_count)
     print('generating %s epoches of captchas in %s.' % (n, img_dir))
 
     for _ in range(n):
