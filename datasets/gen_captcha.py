@@ -7,6 +7,8 @@ import os
 import shutil
 import uuid
 from captcha.image import ImageCaptcha
+import operator as op
+from functools import reduce
 
 import itertools
 
@@ -23,8 +25,7 @@ def get_choices():
     
     return tuple([i for is_selected, subset in choices for i in subset if is_selected])
 
-import operator as op
-from functools import reduce
+
 
 def ncr(n, r):
     r = min(r, n-r)
