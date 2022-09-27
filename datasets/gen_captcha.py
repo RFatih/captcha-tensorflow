@@ -80,8 +80,8 @@ def gen_dataset():
 
     choices = get_choices()
 
-    width = 40 + 20 * num_per_image
-    height = 100
+    width = 215
+    height = 80
 
     # meta info
     meta = {
